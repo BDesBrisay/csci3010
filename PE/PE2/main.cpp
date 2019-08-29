@@ -16,30 +16,44 @@ void printDistances(Point p1, Point p2, Point p3) {
   cout << endl;
 }
 */
-int main() {
-  // hell o world test
-  // cout << "Hello World" << endl;
 
-  // create 3 points
+int main() {
+  // create 3 multidimensional points
   Point p1;
-  p1.setCoord(3);
-  p1.setCoord(2);
+  p1.setCoord(1);
+  p1.setCoord(1);
   p1.setCoord(1);
 
   Point p2;
   p2.setCoord(2);
-  p2.setCoord(4);
+  p2.setCoord(2);
   p2.setCoord(2);
 
-  p1.distance(p1, p2);
+  Point p3;
 
-  // print initial coords
-  // printCoord(1, p1);
-  // printCoord(2, p2);
-  // printCoord(3, p3);
+  // distance between 1 and 2
+  cout << p1.distance(p1, p2) << endl;
 
-  // print initial distances
-  // printDistances(p1, p2, p3);
+  // testing distance function error handling
+  cout << p1.distance(p1, p3) << endl;
+
+
+  // Translate +1
+  p2.translate(1);
+
+  // new distance between 1 and 2
+  cout << p1.distance(p1, p2) << endl;
+
+
+  // Translate -1
+  p1.translate(-1);
+
+  // new distance between 1 and 2
+  cout << p1.distance(p1, p2) << endl;
+
+  
+  // try and translate a point with no values
+  p3.translate(5);
 
   return 0;
 }
