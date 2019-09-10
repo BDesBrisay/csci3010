@@ -1,0 +1,63 @@
+1. Complete the PE 3 quiz on canvas (github username).
+2. Complete pe3_references.cpp.
+3. Answer the following questions in a file titled pe3_bash.txt.
+
+What is the bash command to show your terminal's working directory (current location)?
+ls
+
+How would you create an empty file called empty.txt from the command line?
+touch empty.txt
+
+Using the ls command, how would you list all files beginning with empty in your current directory?
+ls empty*
+
+Using the ls command, the wc command, and the |, how would you count the number of files ending in .txt in your current directory?
+ls *.txt | wc -l
+
+Using the echo command and > or >>, what is the command to write your name to empty.txt? What is the difference between > and >>?
+echo "Bryce DesBrisay" >> empty.txt
+> is used to overwrite file
+>> is used to append to file
+
+What is the bash command to rename that file to notempty.txt?
+mv empty.txt notempty.txt
+
+What is the bash command to create a directory named pe3_bash?
+mkdir pe3_bash
+
+What is the command to move your terminal's working directory to pe3_bash?
+cd pe3_bash
+
+From the pe3_bash directory, how would you create a new directory, pe3_bash_number2 that has the same parent directory as pe3_bash?
+mkdir ../pe3_bash_number2
+
+What is the command to move from pe3_bash to pe3_bash_number2 (use only one command)?
+cd ../pe3_bash_number2
+
+What does pressing the up arrow key do?
+shows you your previously run command
+
+What does pressing the down arrow key do?
+shows you your more recent commands or, if there are no mroe recent ones to show, an empty command line
+
+What does pressing ctrl+r do?
+it lets you search your recent command history
+
+What are two different command-line based text editors (text editors that run from the command line and do not open a separate application)? (Answer the following questions for each editor that you have chosen.)
+emacs and vim
+
+  What command do you use to open a file with this editor?
+  vim: vi file.txt
+  emacs: emacs file.txt
+
+  What command do you use to save a file while using this editor?
+  vim: :w
+  emacs: ctrl-x ctrl-s
+
+  What command do you use to exit this editor?
+  vim: :q
+  emacs: ctrl-x ctrl-c
+
+What are two different reasons you might want to use the text editors listed above?
+to view the contents of a file
+to edit the contents of a file
