@@ -1,0 +1,24 @@
+// check if there is a branch and return its name if there is
+parse_git_branch() {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* (*\([^)]*\))*/\1/'
+}
+
+// return color specs depending on if git is clean or dirty
+markup_git_branch() {
+  // check if it is a git repo in the first place
+  if [[ -n parse_git_branch ]]; then
+    // check if the repo is clean
+    if [[ -z $(git status --porcelain 2> /dev/null) ]]; then
+      // echo a string with colored branch name
+      // green text for clean repos
+      echo -e " \001\033[32m\002$(parse_git_branch)\001\033[0m\002"
+    else
+      // echo a string with colored branch name
+      // red text for dirty repos
+      echo -e " \001\033[31m\002$(parse_git_branch)\001\033[0m\002"
+    fi
+  fi
+}
+
+// export the PS1 with the custom markup included by function call
+export PS1="\h:\W\$(markup_git_branch) \u$ "
