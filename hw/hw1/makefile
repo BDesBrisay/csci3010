@@ -1,14 +1,16 @@
-# define vars that we will reuse
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall
+CXXFLAGS	= -std=c++11 -Wall
 
-# create maze
 all: maze
 
-# clean maze
 clean:
-	rm maze
+	rm Player.o Maze.o maze
 
-# compile main.cpp and point.cpp, output it to maze
-maze: Player.cpp
-	$(CXX) $(CXXFLAGS) main.cpp Player.cpp -o maze
+maze: Player.o Maze.o main.cpp
+	$(CXX) $(CXXFLAGS) main.cpp Player.o Maze.o -o maze
+
+Player.o: Player.cpp
+	$(CXX) $(CXXFLAGS) -c Player.cpp
+
+Maze.o: Maze.cpp
+	$(CXX) $(CXXFLAGS) -c Maze.cpp
