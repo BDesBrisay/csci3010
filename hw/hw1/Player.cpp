@@ -31,6 +31,26 @@ void Player::SetPosition(Position pos) {
 }
 
 /**
+ * takes position and gives the relative direction from the player
+ * 
+ * @return string - direction of position from player
+ */
+string Player::ToRelativePosition(Position pos)  {
+  if (pos.row == pos_.row) {
+    // in the same row
+    if (pos.col > pos_.col) return "RIGHT";
+    else return "LEFT";
+  }
+  else {
+    // in the same column
+    if (pos.row > pos_.row) return "DOWN";
+    else return "UP";
+  }
+
+  return "UNKNOWN DIRECTION";
+}
+
+/**
  * Prints out name and points of a player
  */
 string Player::Stringify()  {
