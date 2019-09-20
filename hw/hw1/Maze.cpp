@@ -4,11 +4,20 @@
 
 using namespace std;
 
+/**
+ * Contructor that sets the turn count to 0
+ */
 Maze::Maze() {
-  cout << "New Maze!" << endl;
   turn_count_ = 0;
 }
 
+/**
+ * Creates a new game by making a board in the board_ field
+ * Populates the players_ vector with a human and a given number of enemies with corresponding default positions
+ * Then it starts the game by having the first player take their turn
+ * 
+ * @params Player * - human player to be played as, int - enemies count
+ */
 void Maze::NewGame(Player * human, const int enemies) {
   players_.push_back(human);
   
@@ -30,15 +39,27 @@ void Maze::NewGame(Player * human, const int enemies) {
   TakeTurn(first);
 }
 
+/**
+ * Take turn prints out the board
+ * then checks if the game is over and generates a report if so
+ * if game is not over yet, print out available moves and prompt for next move
+ * evaluate prompt to see if it's a valid move
+ * if it is, then move player to that new position
+ * 
+ * start the next turn by:
+ * upping the turn count
+ * get the next player
+ * start their turn
+ * 
+ * @params Player * - player whos turn it is
+ */
 void Maze::TakeTurn(Player * p) {
   cout << *board_ << endl;
 
   if (IsGameOver()) {
     cout << GenerateReport() << endl;
-    cout << "GAME OVER" << endl;
   }
   else {
-    cout << GenerateReport() << endl;
     vector<Position> moves = board_->GetMoves(p);
 
     cout << p->get_name() << " can go: ";
@@ -47,9 +68,9 @@ void Maze::TakeTurn(Player * p) {
     }
     cout << endl;
 
-    Position theMove;
-    bool validInput = false;
-    while (!validInput) {
+    Position the_move;
+    bool valid_input = false;
+    while (!valid_input) {
       string input;
       cout << "Enter your choice: ";
       cin >> input;
@@ -57,13 +78,13 @@ void Maze::TakeTurn(Player * p) {
       for (Position pos : moves) {
         string move = p->ToRelativePosition(pos);
         if (StringEquals(input, move)) {
-          theMove = pos;
-          validInput = true;
+          the_move = pos;
+          valid_input = true;
         }
       }
     }
 
-    board_->MovePlayer(p, theMove);
+    board_->MovePlayer(p, the_move);
 
     // next turn
     turn_count_++;
@@ -72,24 +93,36 @@ void Maze::TakeTurn(Player * p) {
   }
 }
 
+/**
+ * Gets the next player in from the players_ vector by using the turn count field
+ * 
+ * @return Player * - the next player up
+ */
 Player * Maze::GetNextPlayer() {
   int index = turn_count_ % players_.size();
   return players_.at(index);
 }
 
+/**
+ * checks if human is at the exit square or if there is a human on the board
+ * 
+ * @return bool - is game over
+ */
 bool Maze::IsGameOver() {
   SquareType end = board_->GetExitOccupant();
   bool has_human = board_->HasHuman();
 
   if (end == SquareType::Human) return true;
   if (!has_human) return true;
-
-  cout << (end == SquareType::Human) << endl;
-  cout << !has_human << endl;
   
   return false;
 }
 
+/**
+ * prints out the name and points of all players
+ * 
+ * @return string - string of all players names and scores after another
+ */
 string Maze::GenerateReport() {
   string report = "";
   
@@ -100,6 +133,12 @@ string Maze::GenerateReport() {
   return report;
 }
 
+/**
+ * evaluates if two strings are equal in a case insensitive manner
+ * 
+ * @params strings - two strings to compare
+ * @return bool - if the strings match
+ */
 bool Maze::StringEquals(string & s1, string & s2) {
 	return (
     (s1.size() == s2.size()) && 

@@ -51,7 +51,9 @@ string Player::ToRelativePosition(Position pos)  {
 }
 
 /**
- * Prints out name and points of a player
+ * formats name and points of a player into a string
+ * 
+ * @return string - player's name and score in a sentence
  */
 string Player::Stringify()  {
   string text = name_ + " has ";

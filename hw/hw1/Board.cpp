@@ -5,6 +5,12 @@
 using namespace std;
 
 
+/**
+ * given a SquareType, returns a matching emoji
+ * 
+ * @params SquareType - type of square we need a string for
+ * @return string - emoji for squareType
+ */
 string SquareTypeStringify(SquareType t) {
   if (t == SquareType::Exit) return "\xF0\x9F\x8C\x80";
   if (t == SquareType::Wall) return "\xE2\xAC\x9C";
@@ -14,6 +20,12 @@ string SquareTypeStringify(SquareType t) {
   else return "\xE2\xAC\x9B";
 }
 
+/**
+ * sets the << operator to handle printing out entire board at once
+ * 
+ * @params ostream - os to add to, Board - board to print
+ * @return ostream - returns os with board printed out
+ */
 ostream& operator<<(ostream& os, const Board &b) {
   os << "\n";
   for (int i = 0; i < b.get_rows(); i++) {
@@ -25,6 +37,11 @@ ostream& operator<<(ostream& os, const Board &b) {
   return os;
 }
 
+/**
+ * Constructor to setup board and populate it with SquareTypes
+ * 
+ * @params int - enemy count
+ */
 Board::Board(const int enemies) {
   int cols = get_cols();
   int rows = get_rows();
@@ -50,6 +67,7 @@ Board::Board(const int enemies) {
     }
   }
 
+  // place enemies at the top right of the board
   for (int i = 0; i < enemies; i++) {
     arr_[0][cols - 1 - i] = SquareType::Enemy;
   }
@@ -59,14 +77,31 @@ Board::Board(const int enemies) {
   arr_[rows - 1][cols - 1] = SquareType::Exit;
 }
 
+/**
+ * gives the type of a square at a given position
+ * 
+ * @params Position - position to evaluate
+ * @return SquareType - type of square at given position
+ */
 SquareType Board::get_square_value(Position pos) const {
   return arr_[pos.row][pos.col];
 }; 
 
+/**
+ * sets the value of a square at a position
+ * 
+ * @params Position - position to change, SquareType - new type value to put at position
+ */
 void Board::SetSquareValue(Position pos, SquareType value) {
   arr_[pos.row][pos.col] = value;
 }
 
+/**
+ * gets all available moves for a player (not a wall or off of board)
+ * 
+ * @params Player * - player to use as reference point
+ * @return vector<Position> - vector of available moves' positions
+ */
 vector<Position> Board::GetMoves(Player * p) {
   vector<Position> res;
 
@@ -108,6 +143,14 @@ vector<Position> Board::GetMoves(Player * p) {
   return res;
 }
 
+/**
+ * actually moves a player on the board and changes the position of the player internally
+ * if enemy moves onto another enemy, nothing happens
+ * if player moves onto enemy player vanishes and is removed from the board (this is picked up by the IsGameOver function of Board)
+ * 
+ * @params Player * - player to move, Position - new position to move to
+ * @return bool - if player was successfully moved
+ */
 bool Board::MovePlayer(Player * p, Position pos) {
   Position old = p->get_position();
   int rows = get_rows();
@@ -150,12 +193,22 @@ bool Board::MovePlayer(Player * p, Position pos) {
   return 0;
 }
 
+/**
+ * gets SquareType of the exit square
+ * 
+ * @return SquareType - type of the last square on board
+ */
 SquareType Board::GetExitOccupant() {
   int rows = get_rows();
   int cols = get_cols();
   return arr_[rows - 1][cols - 1];
 }
 
+/**
+ * helper function to check if a human is on the board
+ * 
+ * @return bool - if board has a human on it
+ */
 bool Board::HasHuman() {;
   int cols = get_cols();
   int rows = get_rows();
