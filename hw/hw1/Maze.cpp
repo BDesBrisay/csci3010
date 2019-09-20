@@ -108,6 +108,7 @@ Player * Maze::GetNextPlayer() {
 
 /**
  * checks if human is at the exit square or if there is a human on the board
+ * ADDITION: also checks if max_turn_count_ is exceeded
  * 
  * @return bool - is game over
  */
