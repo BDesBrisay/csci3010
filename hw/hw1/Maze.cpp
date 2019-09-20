@@ -18,12 +18,15 @@ Maze::Maze() {
  * 
  * @params Player * - human player to be played as, int - enemies count
  */
-void Maze::NewGame(Player * human, const int enemies) {
-  players_.push_back(human);
+void Maze::NewGame(Player * human, const int enemies, const int max_turn_count) {
+  // Normalizes the given max turn count to account for enemies' turns
+  max_turn_count_ = max_turn_count * (enemies + 1);
   
   Board * b = new Board(enemies);
   board_ = b;
   int cols = board_->get_cols() - 1;
+
+  players_.push_back(human);
 
   for (int i = 0; i < enemies; i++) {
     string name = "Enemy " + to_string(i + 1);
@@ -115,6 +118,12 @@ bool Maze::IsGameOver() {
   if (end == SquareType::Human) return true;
   if (!has_human) return true;
   
+  // Limit the number of turns allowed
+  if (turn_count_ > max_turn_count_) {
+    cout << "Max # of Turns Reached... GAME OVER" << endl;
+    return true;
+  }
+
   return false;
 }
 

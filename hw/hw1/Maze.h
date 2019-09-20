@@ -13,7 +13,7 @@ public:
 //
 //	// initialize a new game, given one human player and 
 //	// a number of enemies to generate
-	void NewGame(Player *human, const int enemies);
+	void NewGame(Player *human, const int enemies, const int max_turn_count);
 //
 //	// have the given Player take their turn
 	void TakeTurn(Player *p);
@@ -36,6 +36,8 @@ private:
 	Board *board_; 
 	vector<Player *> players_;
 	int turn_count_;
+	// ADDED TO LIMIT NUMBER OF TURNS TAKEN
+	int max_turn_count_;
 //
 //	// you may add more fields, as needed
 //
