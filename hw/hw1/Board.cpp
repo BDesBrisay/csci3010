@@ -25,7 +25,7 @@ ostream& operator<<(ostream& os, const Board &b) {
   return os;
 }
 
-Board::Board() {
+Board::Board(const int enemies) {
   int cols = get_cols();
   int rows = get_rows();
 
@@ -48,6 +48,10 @@ Board::Board() {
         arr_[i][j] = SquareType::Empty;
       }
     }
+  }
+
+  for (int i = 0; i < enemies; i++) {
+    arr_[0][cols - 1 - i] = SquareType::Enemy;
   }
 
   // regardless of what was there before, set start and end points to Human and Exit
@@ -106,21 +110,41 @@ vector<Position> Board::GetMoves(Player * p) {
 
 bool Board::MovePlayer(Player * p, Position pos) {
   Position old = p->get_position();
-  arr_[old.row][old.col] = SquareType::Empty;
+  int rows = get_rows();
+  int cols = get_cols();
 
-  SquareType newSquare = arr_[pos.row][pos.col];
-  if (newSquare == SquareType::Treasure) {
+  SquareType new_square = arr_[pos.row][pos.col];
+  if (new_square == SquareType::Treasure) {
     p->ChangePoints(100);
   }
 
   if (p->is_human()) {
-    arr_[pos.row][pos.col] = SquareType::Human;
+    // if new_square is enemy, enemy eats human
+    if (new_square == SquareType::Enemy) {
+      arr_[old.row][old.col] = SquareType::Empty;
+      arr_[pos.row][pos.col] = SquareType::Enemy;
+      p->SetPosition(pos);
+    }
+    // else move human
+    else {
+      arr_[old.row][old.col] = SquareType::Empty;
+      arr_[pos.row][pos.col] = SquareType::Human;
+      p->SetPosition(pos);
+    }
   }
-  else {
+  // p is enemy and new_square is not, then move enemy
+  else if (new_square != SquareType::Enemy) {
+    if (old.row == rows - 1 && old.col == cols - 1) {
+      // restore exit if enemy moves over it
+      arr_[old.row][old.col] = SquareType::Exit;
+    }
+    else {
+      arr_[old.row][old.col] = SquareType::Empty;
+    }
     arr_[pos.row][pos.col] = SquareType::Enemy;
+    p->SetPosition(pos);
+    
   }
-
-  p->SetPosition(pos);
   
   if (p->get_position() == pos) return 1;
   return 0;
@@ -129,5 +153,20 @@ bool Board::MovePlayer(Player * p, Position pos) {
 SquareType Board::GetExitOccupant() {
   int rows = get_rows();
   int cols = get_cols();
-  return arr_[rows][cols];
+  return arr_[rows - 1][cols - 1];
+}
+
+bool Board::HasHuman() {;
+  int cols = get_cols();
+  int rows = get_rows();
+  
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+      if (arr_[i][j] == SquareType::Human) {
+        return true;
+      }
+    }
+  }
+
+  return false;
 }

@@ -15,7 +15,7 @@ string SquareTypeStringify(SquareType sq);
 class Board {
 public:
 	// TODO: implement
-	Board();
+	Board(const int enemies);
 	
 	// already implemented in line
 	int get_rows() const { return 4; }  // you should be able to change the size of your 
@@ -40,6 +40,8 @@ public:
 //
 //	// You probably want to implement this
 	friend ostream& operator<<(ostream& os, const Board &b);
+
+  bool HasHuman();
 
 private:
 	SquareType arr_[4][4];

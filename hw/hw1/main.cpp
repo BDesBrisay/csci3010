@@ -8,6 +8,12 @@ using namespace std;
 int main() {
   Player * p1 = new Player("Wanda", true);
 
+  Maze * maze = new Maze();
+  maze->NewGame(p1, 2);
+
+  
+
+
 /*
   cout << p1->get_position().col << endl;
 
@@ -19,7 +25,7 @@ int main() {
   cout << p1->get_position().col << endl;
   cout << p1->ToRelativePosition(newPos1) << endl;
   cout << p1->ToRelativePosition(newPos2) << endl;
-*/
+* /
   Position newPos = { .row = 0, .col = 1 };
 
   Board * b = new Board();
@@ -41,6 +47,7 @@ int main() {
   for (Position pos : moves2) {
     cout << p1->ToRelativePosition(pos) << endl;
   }
+  */
 
   return 0;
 }
