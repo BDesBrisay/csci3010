@@ -5,6 +5,14 @@
 
 using namespace std;
 
+/**
+ * main function creates a human player, maze
+ * then starts a new maze game
+ * 
+ * COMMANDS TO START MAZE:
+ * make
+ * ./maze
+ */
 int main() {
   Player * p1 = new Player("Wanda", true);
   Maze * maze = new Maze();
