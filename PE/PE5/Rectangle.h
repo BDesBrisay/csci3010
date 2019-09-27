@@ -1,7 +1,11 @@
 #ifndef _RECTANGLE_H_
 #define _RECTANGLE_H_
 
-#include <iostream>
+/*
+Authors:
+David Skrenta
+Bryce DesBrisay
+*/
 
 // Example function for the beginning tests
 // Really, it shouldn't be in a Rectangle header file but we

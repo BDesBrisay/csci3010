@@ -3,6 +3,12 @@
 
 #include "Rectangle.h"
 
+/*
+Authors:
+David Skrenta
+Bryce DesBrisay
+*/
+
 Point p1 = {
   x: 1,
   y: 1

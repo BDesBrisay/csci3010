@@ -1,12 +1,27 @@
 /*
+Authors:
+David Skrenta
+Bryce DesBrisay
+
 Original bugs: Shrink rectangle does not properly modify point1 coordinates
 */
-
+#include <iostream>
 #include "Rectangle.h"
 
 Rectangle::Rectangle(Point p1, Point p2) {
-  p1_ = p1;
-  p2_ = p2;
+  // check if valid rectangle
+  if (p1.x >= p2.x || p1.y >= p2.y) {
+    std::cout << "Point's are invalid, unable to make rectangle." << std::endl;
+    Point e1 = { x: 0, y: 0 };
+    Point e2 = { x: 1, y: 1 };
+    
+    p1_ = e1;
+    p2_ = e2;
+  }
+  else {
+    p1_ = p1;
+    p2_ = p2;
+  }
 }
 
 int Rectangle::GetWidth() {
