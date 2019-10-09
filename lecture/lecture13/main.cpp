@@ -33,7 +33,6 @@ int main(int argc, char **argv){
     // 3) Call IncreasePopulation from one of your Earth instances. Can you see this change
     // from your other Earth instance?
 
-
     cout << earth2.get_population() << endl;
 
     earth1.IncreasePopulation();

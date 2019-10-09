@@ -4,7 +4,7 @@
 
 class Earth {
 public:
-  static int public_field_;
+  int public_field_;
 	
 	static Earth& GetInstance() {
 		// gets instantiated the first time
