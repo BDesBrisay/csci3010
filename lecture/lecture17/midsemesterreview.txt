@@ -1,0 +1,178 @@
+Name: Bryce DesBrisay
+
+Turn this file in on canvas before the end of class.
+
+This review is meant to be a check-in with yourself. Which of the topics are you confident about? Which are you less confident about? What do you need to review?
+
+For each question, answer without looking at the internet, then compare answers with your table-mates and your notes.
+
+
+Section 1: c++
+---------
+1. What is a reference? What is a pointer? How are they different?
+A reference refers to an actual variable while a pointer points to the address of the variable
+
+2. Given the following class definition, how would you call the method CalculateMysteries?
+
+class Foo {
+public:
+    Foo(int bar) : bar_(bar) {}
+
+    int CalculateMysteries();
+
+    static int TotalBars();
+
+private:
+    int bar_;
+
+    static int baz_;
+};
+
+Create an instance of Foo then call Foo->CalculateMysteries()
+
+3. How would you call the method TotalBars()?
+Call Foo::TotalBars()
+
+4. Can you access the field bar_ from inside the method TotalBars()? Why/why not?
+Yes but only if you pass the instance of Foo into the static TotalBars method, otherwise, a static method can only access other static values/methods
+
+5. Can you access the field baz_ from inside the method CalculateMysteries()? Why/why not?
+Yes, it is a regular class method that has access to all of the classes private fields
+
+6. Create a Foo reference, then call one of the Foo methods.
+Foo & fee = new Foo(0);
+fee.CalculateMysteries()
+
+7. Create a Foo pointer, then call one of the Foo methods.
+Foo * fii = fee;
+fii->CalculateMysteries()
+
+8. Why would you make a field a pointer?
+To prevent that value from being copied everywhere it is used and instead have all the methods using it change the actual value of it
+
+Section 2: Good Coding Practices
+-----------
+
+1. How would you improve the following code block:
+
+bool hasACat = true;
+
+if (hasACat == true) {
+// Do nothing.
+} else {
+returnItForADog();
+}
+
+if (!hasACat) returnItForADog();
+
+2. How would you improve the following code block:
+
+int x = 3;
+int y = 5;
+
+if(y > x) {
+    cout << “We’re messing with numbers!” << endl;
+    x += 1;
+} else if(x > y) {
+    cout << “We’re messing with numbers!” << endl;
+    y += 1;
+} else if(x == y) {
+    cout << “We’re messing with numbers!” << endl;
+    x  = x + y;
+}
+
+
+int x = 3;
+int y = 5;
+
+cout << “We’re messing with numbers!” << endl;
+if(y > x) {
+    x += 1;
+} else if(x > y) {
+    y += 1;
+} else if(x == y) {
+    x  = x + y;
+}
+
+Section 3: keywords/const/overloading
+------------
+
+1. Why would you use a const field? Why would you use a const method?
+Use const field if you know the field will not change. 
+Use const method when you don't change any of the fields in the class instance
+
+2. Where do you instantiate a const field in a class?
+(as opposed to a static field and/or a "regular" field)
+In the private section of the class
+
+3. Where and why would you use the “virtual” keyword? What is this concept called and why is it important?
+the virtual keyword allows for a method or a property to be overridden in a child class
+
+4. Why would you need to overload a comparison operator?
+When it is not already defined for that type
+
+5. What is one thing about inheritance that you wish that you knew better?
+Why there are so many different ways to structure inheritence and what the benefits of each are
+
+Section 4: Version control & git
+----------
+1. What is a branch? Why would you work on a non-master branch?
+A branch is different version of the original code that tracks the exact changes. You would work on a non-master branch if you are making changes to code that others are also working on.
+
+2. If you are currently working on the branch my-fabulous-feature and your teammate merges another feature into master, what are the commands that you would run to switch to master, get the new code, switch back to your branch, and merge the new code from master into your branch?
+git checkout master
+git pull
+git checkout my-fabulous-feature
+git merge master
+
+3. What is the difference between issuing a "git pull" and submitting a "pull request"?
+git pull pulls new code from a remote branch into your local codebase while a pull request is about merging two branches together
+
+4. When you're reviewing a PR, what are 3 different specific things that you should look for in the code that you're reviewing?
+Did they follow style guidelines
+Does the code actually work/compile
+Are there any uneccessary files pushed
+
+
+Section 5: bash
+------------
+1. What is a PS1 in general (what does this control)?
+The shell prompt
+
+2. Rate your level of comfort working on the command line on a scale from "not comfortable at all" to "completely comfortable, I am a command line master". Be honest with yourself. What are a few things that you wish you were more comfortable with on the command line?
+Very comfortable but there are still areas of unknown. I wish I was better at using sed and awk without consulting the man pages 
+
+3. If you are developing in an IDE (such as Sublime, CodeRunner, CodeBlocks, XCode, etc) and your project isn't compiling by pressing the "run/build" button, what are two things that you could do to fix the issue? (Imagine that a friend is having this issue and you are explaining a few things that they could do to figure out what is going on).
+Use the command line so you can see the actual errors
+Then if that doesn't work, cout everything at every step of the way so you make sure you rprogram is doing what it is intended to do
+
+
+Section 6: Unit testing/Catch2
+------------
+1. What is a TEST_CASE? What is a SECTION? What should each be used for? How many methods should be tested in each TEST_CASE? what about each SECTION?
+A TEST_CASE defines a method that tests other methods and ensures they work as intended.
+A SECTION is a sub-test of the larger TEST_CASE
+Each TEST_CASE should only test one thing at a time
+Each SECITON in a test case will test different variations of the overall TEST_CASE
+
+Section 7: Design Patterns
+----------
+1. For each of the following design patterns, briefly describe what problem they solve and how they are implemented in c++.
+
+a. Singleton
+Only one instance of the class can be defined so that each new instance of it refers to the original one
+
+b. Flyweight
+Minimizes memory footprint of repeated objects by sharing as much data as possible
+
+c. Prototype
+Prototypes are used to make repeatedly defined structures easily constructed
+
+d. Factory
+Allows for objects to be created without being closely tied to the class hierarchy of the library
+
+e. Iterator
+Allows for iteration over objects to access the elements
+
+2. In class, we went over how you will frequently interact with the design pattern Iterator but will rarely implement it yourselves. Why is this?
+We are able to use already defined public libraries that use iterator design patterns
