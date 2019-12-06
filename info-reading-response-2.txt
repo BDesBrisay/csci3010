@@ -1,0 +1,13 @@
+Reading Response
+Bryce DesBrisay
+10/31/2019
+
+What is log data? 
+Log data is a record of the past
+
+What can we learn from log data? What can we not learn from log data? 
+Log data helps us understand the past, in order to help predict the future. 
+Despite this, log data will not give us exactly what will happen in the future, just a guideline.
+
+How do log data and analysis compare to other methods we've explored (e.g. observation, interviews, surveys)?
+They all use different methods to aquire data, but they use the same tools to analyze it.

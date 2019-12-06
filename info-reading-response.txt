@@ -1,0 +1,13 @@
+Reading Response
+Bryce DesBrisay
+
+
+What is log data? 
+Log data is essentially a recording of a past state
+
+What can we learn from log data? What can we not learn from log data? 
+We can learn lots from log data, such as meta stats, bugs, what exactly happened. 
+Log data does not tell us what will happen in the future, but it can give us a general idea.
+
+How do log data and analysis compare to other methods we've explored (e.g. observation, interviews, surveys)?
+They all are different ways to gethere the information but they generally use the same analysis tools to interpret the data.
